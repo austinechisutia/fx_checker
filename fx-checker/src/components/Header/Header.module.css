@@ -1,0 +1,51 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.logo {
+  height: 20px;
+  width: auto;
+}
+
+.meta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ticker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-ticker-bg);
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.tickerLabel {
+  flex-shrink: 0;
+  padding: 0 16px 0 24px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--color-border);
+}
+
+.tickerTrack {
+  display: flex;
+  gap: 32px;
+  white-space: nowrap;
+  /* Animation added once pairs are populated */
+}

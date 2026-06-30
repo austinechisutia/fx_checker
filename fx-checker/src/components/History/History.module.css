@@ -1,0 +1,122 @@
+.container {
+  padding: 20px 24px 24px;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.statValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.positive {
+  color: var(--color-positive);
+}
+
+.negative {
+  color: var(--color-negative);
+}
+
+.ranges {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.rangeBtn {
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color 0.15s, background 0.15s;
+}
+
+.rangeBtn:hover {
+  color: var(--color-text-secondary);
+}
+
+.rangeBtnActive {
+  background: var(--color-accent-dim);
+  color: var(--color-accent);
+}
+
+.pairRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pairLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.04em;
+}
+
+.pairMeta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.chartWrap {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+}
+
+.loading {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 40px 0;
+  margin: 0 auto;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px 0;
+}
+
+.emptyTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.emptyBody {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  max-width: 360px;
+  line-height: 1.6;
+}
