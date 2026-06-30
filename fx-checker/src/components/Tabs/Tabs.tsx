@@ -4,23 +4,27 @@ import History from '../History/History';
 import Compare from '../Compare/Compare';
 import Favourites from '../Favourites/Favourites';
 import Log from '../Log/Log';
+import { usePinned } from '../../context/PinnedContext';
+import { useLog } from '../../context/LogContext';
 
 type TabId = 'history' | 'compare' | 'favourites' | 'log';
 
-const TABS: { id: TabId; label: string; badge?: number }[] = [
-  { id: 'history', label: 'History' },
-  { id: 'compare', label: 'Compare' },
-  { id: 'favourites', label: 'Favorites', badge: 0 },
-  { id: 'log', label: 'Log', badge: 0 },
-];
-
 export default function Tabs() {
   const [active, setActive] = useState<TabId>('history');
+  const { pinned } = usePinned();
+  const { entries } = useLog();
+
+  const tabs: { id: TabId; label: string; badge?: number }[] = [
+    { id: 'history', label: 'History' },
+    { id: 'compare', label: 'Compare' },
+    { id: 'favourites', label: 'Favorites', badge: pinned.size },
+    { id: 'log', label: 'Log', badge: entries.length },
+  ];
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.tabList} role="tablist">
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             role="tab"

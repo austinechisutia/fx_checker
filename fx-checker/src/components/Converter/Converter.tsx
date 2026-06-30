@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCurrency } from '../../context/CurrencyContext';
+import { useLog } from '../../context/LogContext';
 import CurrencyPicker from '../CurrencyPicker/CurrencyPicker';
 import { getFlagCode } from '../../lib/currencyFlags';
 import styles from './Converter.module.css';
@@ -27,8 +28,14 @@ export default function Converter() {
 
   const [pickerSlot, setPickerSlot] = useState<PickerSlot>(null);
 
+  const { addEntry } = useLog();
   const rate = rates[quote] ?? 0;
   const receiveAmount = sendAmount * rate;
+
+  function handleLogConversion() {
+    if (!sendAmount || !rate) return;
+    addEntry({ base, quote, sendAmount, receiveAmount, rate });
+  }
 
   function handlePickerSelect(code: string) {
     if (pickerSlot === 'base') setBase(code);
@@ -107,7 +114,7 @@ export default function Converter() {
           <img src="/assets/images/icon-star.svg" alt="" />
           Favorite
         </button>
-        <button className={styles.logBtn} type="button">
+        <button className={styles.logBtn} type="button" onClick={handleLogConversion}>
           Log conversion
         </button>
       </div>
