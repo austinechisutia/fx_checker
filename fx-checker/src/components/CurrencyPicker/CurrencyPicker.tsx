@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useCurrency } from '../../context/CurrencyContext';
-import { getFlagCode } from '../../lib/currencyFlags';
+import CurrencyFlag from '../CurrencyFlag/CurrencyFlag';
 import styles from './CurrencyPicker.module.css';
 
 const POPULAR = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'HKD', 'SGD'];
@@ -139,14 +139,7 @@ function CurrencyRow({ code, name, isSelected, onSelect }: RowProps) {
       aria-selected={isSelected}
       onClick={() => onSelect(code)}
     >
-      <img
-        src={`/assets/images/flags/${getFlagCode(code)}.webp`}
-        alt=""
-        width={24}
-        height={24}
-        className={styles.flag}
-        onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
-      />
+      <CurrencyFlag code={code} size={24} className={styles.flag} />
       <span className={styles.code}>{code}</span>
       <span className={styles.name}>{name}</span>
       {isSelected && (

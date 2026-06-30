@@ -1,6 +1,6 @@
 import { useCurrency } from '../../context/CurrencyContext';
 import { usePinned } from '../../context/PinnedContext';
-import { getFlagCode } from '../../lib/currencyFlags';
+import CurrencyFlag from '../CurrencyFlag/CurrencyFlag';
 import styles from './Compare.module.css';
 
 export default function Compare() {
@@ -52,14 +52,7 @@ export default function Compare() {
 
           return (
             <li key={code} className={styles.row}>
-              <img
-                src={`/assets/images/flags/${getFlagCode(code)}.webp`}
-                alt=""
-                width={32}
-                height={32}
-                className={styles.flag}
-                onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
-              />
+              <CurrencyFlag code={code} size={32} className={styles.flag} />
               <div className={styles.info}>
                 <span className={styles.code}>{code}</span>
                 <span className={styles.name}>{currencies[code]}</span>

@@ -2,23 +2,10 @@ import { useState } from 'react';
 import { useCurrency } from '../../context/CurrencyContext';
 import { useLog } from '../../context/LogContext';
 import CurrencyPicker from '../CurrencyPicker/CurrencyPicker';
-import { getFlagCode } from '../../lib/currencyFlags';
+import CurrencyFlag from '../CurrencyFlag/CurrencyFlag';
 import styles from './Converter.module.css';
 
 type PickerSlot = 'base' | 'quote' | null;
-
-function FlagImg({ code }: { code: string }) {
-  return (
-    <img
-      src={`/assets/images/flags/${getFlagCode(code)}.webp`}
-      alt=""
-      width={20}
-      height={20}
-      className={styles.flag}
-      onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
-    />
-  );
-}
 
 export default function Converter() {
   const {
@@ -65,7 +52,7 @@ export default function Converter() {
               aria-label={`Send currency: ${base}. Change currency`}
               onClick={() => setPickerSlot('base')}
             >
-              <FlagImg code={base} />
+              <CurrencyFlag code={base} size={20} />
               <span>{base}</span>
               <img src="/assets/images/icon-chevron-down.svg" alt="" />
             </button>
@@ -95,7 +82,7 @@ export default function Converter() {
               aria-label={`Receive currency: ${quote}. Change currency`}
               onClick={() => setPickerSlot('quote')}
             >
-              <FlagImg code={quote} />
+              <CurrencyFlag code={quote} size={20} />
               <span>{quote}</span>
               <img src="/assets/images/icon-chevron-down.svg" alt="" />
             </button>

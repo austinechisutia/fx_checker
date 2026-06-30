@@ -74,3 +74,22 @@
 .down {
   color: var(--color-negative);
 }
+
+.changeMuted {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.skeleton {
+  flex: 1;
+  height: 10px;
+  border-radius: 4px;
+  background: var(--color-border);
+  margin: 0 24px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
