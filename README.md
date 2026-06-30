@@ -187,3 +187,7 @@ There are multiple places you can share your solution:
 We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
 
 **Have fun building, and good luck in the hackathon!** 🚀
+
+## 🏅 Greatest Achievement
+
+Built the entire FX Checker app in under 4 hours by leveraging AI-assisted development. From API integration and real-time conversion logic to the rate history chart, comparison view, favorites, and conversion log — the full feature set was designed, implemented, and deployed within a single focused session using AI as a coding partner.
