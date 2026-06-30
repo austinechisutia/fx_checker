@@ -43,36 +43,16 @@ export default function Tabs() {
         ))}
       </div>
 
-      <div
-        id={`panel-history`}
-        role="tabpanel"
-        aria-labelledby="tab-history"
-        hidden={active !== 'history'}
-      >
+      <div id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden={active !== 'history'}>
         <History />
       </div>
-      <div
-        id={`panel-compare`}
-        role="tabpanel"
-        aria-labelledby="tab-compare"
-        hidden={active !== 'compare'}
-      >
+      <div id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden={active !== 'compare'}>
         <Compare />
       </div>
-      <div
-        id={`panel-favourites`}
-        role="tabpanel"
-        aria-labelledby="tab-favourites"
-        hidden={active !== 'favourites'}
-      >
+      <div id="panel-favourites" role="tabpanel" aria-labelledby="tab-favourites" hidden={active !== 'favourites'}>
         <Favourites />
       </div>
-      <div
-        id={`panel-log`}
-        role="tabpanel"
-        aria-labelledby="tab-log"
-        hidden={active !== 'log'}
-      >
+      <div id="panel-log" role="tabpanel" aria-labelledby="tab-log" hidden={active !== 'log'}>
         <Log />
       </div>
     </div>

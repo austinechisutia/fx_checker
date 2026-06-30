@@ -174,7 +174,7 @@ export default function History() {
                   color: '#fff',
                 }}
                 labelStyle={{ color: '#5a6272', marginBottom: 4 }}
-                formatter={(value: number) => [value.toFixed(4), `${BASE}/${SYMBOL}`]}
+                formatter={(value: number) => [value.toFixed(4), `${base}/${quote}`]}
               />
 
               <Area
