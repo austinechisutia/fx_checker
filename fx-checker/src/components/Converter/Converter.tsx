@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useCurrency } from '../../context/CurrencyContext';
 import { useLog } from '../../context/LogContext';
 import CurrencyPicker from '../CurrencyPicker/CurrencyPicker';
@@ -7,6 +7,10 @@ import styles from './Converter.module.css';
 
 type PickerSlot = 'base' | 'quote' | null;
 
+function formatWithCommas(n: number) {
+  return n > 0 ? n.toLocaleString('en-US', { maximumFractionDigits: 2 }) : '';
+}
+
 export default function Converter() {
   const {
     base, quote, sendAmount, rates, ratesDate, loading,
@@ -14,10 +18,36 @@ export default function Converter() {
   } = useCurrency();
 
   const [pickerSlot, setPickerSlot] = useState<PickerSlot>(null);
+  const [displaySend, setDisplaySend] = useState<string>(formatWithCommas(sendAmount));
+  const isTyping = useRef(false);
+
+  // Sync display when sendAmount changes externally (e.g. swap, context load)
+  useEffect(() => {
+    if (!isTyping.current) {
+      setDisplaySend(formatWithCommas(sendAmount));
+    }
+  }, [sendAmount]);
 
   const { addEntry } = useLog();
   const rate = rates[quote] ?? 0;
   const receiveAmount = sendAmount * rate;
+
+  function handleSendFocus() {
+    isTyping.current = true;
+  }
+
+  function handleSendChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const raw = e.target.value.replace(/,/g, '');
+    if (raw === '' || /^\d*\.?\d*$/.test(raw)) {
+      setSendAmount(raw === '' ? 0 : Number(raw));
+      setDisplaySend(e.target.value.replace(/[^0-9.,]/g, ''));
+    }
+  }
+
+  function handleSendBlur() {
+    isTyping.current = false;
+    setDisplaySend(formatWithCommas(sendAmount));
+  }
 
   function handleLogConversion() {
     if (!sendAmount || !rate) return;
@@ -33,6 +63,7 @@ export default function Converter() {
     <section className={styles.converter} aria-label="Currency converter">
       <h1 className={styles.heading}>Check the rate</h1>
 
+      <div className={styles.card}>
       <div className={styles.inputs}>
         {/* Send */}
         <div className={styles.field}>
@@ -41,10 +72,12 @@ export default function Converter() {
             <input
               id="send-amount"
               className={styles.amount}
-              type="number"
-              value={sendAmount}
-              min={0}
-              onChange={(e) => setSendAmount(Number(e.target.value))}
+              type="text"
+              inputMode="decimal"
+              value={displaySend}
+              onFocus={handleSendFocus}
+              onChange={handleSendChange}
+              onBlur={handleSendBlur}
             />
             <button
               className={styles.currencyBtn}
@@ -66,7 +99,7 @@ export default function Converter() {
           aria-label="Swap currencies"
           onClick={swapPair}
         >
-          <img src="/assets/images/icon-exchange-vertical.svg" alt="" />
+          <img src="/assets/images/icon-exchange.svg" alt="" />
         </button>
 
         {/* Receive */}
@@ -90,20 +123,24 @@ export default function Converter() {
         </div>
       </div>
 
-      <p className={styles.rate}>
-        {loading
-          ? 'Fetching rate…'
-          : `1 ${base} = ${rate.toFixed(4)} ${quote}${ratesDate ? ` · ${ratesDate}` : ''}`}
-      </p>
+      <div className={styles.rateRow}>
+        <p className={styles.rate}>
+          {loading
+            ? 'Fetching rate…'
+            : `1 ${base} = ${rate.toFixed(4)} ${quote}${ratesDate ? ` · ${ratesDate}` : ''}`}
+        </p>
 
-      <div className={styles.actions}>
-        <button className={styles.favouriteBtn} type="button">
-          <img src="/assets/images/icon-star.svg" alt="" />
-          Favorite
-        </button>
-        <button className={styles.logBtn} type="button" onClick={handleLogConversion}>
-          Log conversion
-        </button>
+        <div className={styles.actions}>
+          <button className={styles.favouriteBtn} type="button">
+            <img src="/assets/images/icon-star.svg" alt="" />
+            Favorite
+          </button>
+          <button className={styles.logBtn} type="button" onClick={handleLogConversion}>
+            Log conversion
+          </button>
+        </div>
+      </div>
+
       </div>
 
       <CurrencyPicker
