@@ -1,5 +1,5 @@
 .container {
-  padding: 20px 24px 24px;
+  padding: 20px 0 24px;
 }
 
 .stats {
@@ -8,6 +8,7 @@
   gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  padding: 0 24px;
 }
 
 .stat {
@@ -77,6 +78,7 @@
   align-items: baseline;
   gap: 12px;
   margin-bottom: 12px;
+  padding: 0 24px;
 }
 
 .pairLabel {
